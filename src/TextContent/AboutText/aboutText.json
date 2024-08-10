@@ -1,0 +1,36 @@
+{
+    "aboutFoodBox": {
+      "title": "About FoodBox",
+      "description": "Welcome to FoodBox, your ultimate solution for fresh, delicious, and convenient meal planning. At FoodBox, we understand that modern life can be hectic, and finding time to plan, shop for, and cook nutritious meals can be challenging. That’s why we’ve created a seamless service that brings the joy of home-cooked meals straight to your door, saving you time and effort while ensuring you eat healthily and deliciously.",
+      "howItWorks": {
+        "title": "How It Works",
+        "steps": [
+          "Choose Your Recipes: Select up to 5 recipes from our curated weekly menu. Our diverse menu includes a variety of dishes to suit all tastes and dietary needs, from classic comfort foods to exotic new flavors.",
+          "We Prepare Your Box: Once you've made your selections, we get to work. We source the freshest ingredients, pre-measure everything, and package it all up in an insulated, eco-friendly box to ensure it arrives fresh at your doorstep.",
+          "Delivery to Your Door: Your FoodBox is delivered directly to your home or office at your convenience. Our flexible delivery options mean you can choose a time that suits your schedule.",
+          "Cook and Enjoy: Each recipe comes with easy-to-follow instructions, complete with pictures and tips from our professional chefs. Cooking a delicious meal has never been easier or more fun."
+        ]
+      },
+      "benefits": {
+        "title": "Benefits",
+        "points": [
+          { "title": "Convenience", "description": "Save time on meal planning and grocery shopping. With FoodBox, you receive everything you need to prepare delicious meals delivered straight to your door." },
+          { "title": "Freshness", "description": "Enjoy fresh, high-quality ingredients sourced from trusted suppliers. Our ingredients are carefully selected to ensure you get the best flavors and nutritional value." },
+          { "title": "Variety", "description": "Explore a diverse menu that changes weekly. From classic comfort foods to exotic new dishes, there’s always something exciting to try." },
+          { "title": "Portion Control", "description": "Say goodbye to food waste with perfectly portioned ingredients. Each FoodBox includes the exact amount you need for each recipe, ensuring nothing goes to waste." },
+          { "title": "Health Benefits", "description": "Maintain a balanced diet with our nutritionally designed recipes. FoodBox helps you stay on track with healthy eating, offering options for various dietary needs and preferences." },
+          { "title": "Sustainability", "description": "Join our commitment to sustainability. FoodBox uses eco-friendly packaging and partners with local farmers to support sustainable practices and reduce our environmental footprint." }
+        ]
+      },
+      "whyChooseUs": {
+        "title": "Why Choose FoodBox?",
+        "points": [
+          "Flexible Plans: Whether you're cooking for one or feeding a family, we offer flexible plans to suit your needs. Skip a week or cancel anytime without hassle.",
+          "Sustainable Practices: We are committed to sustainability. Our packaging is eco-friendly, and we partner with local farmers and suppliers to bring you the freshest, responsibly sourced ingredients.",
+          "Community and Support: Join a community of food lovers. Share your cooking experiences, get tips, and be inspired by others. Our customer support team is always here to help with any questions or concerns.",
+          "Satisfaction Guaranteed: Your satisfaction is our top priority. If you're not completely happy with your FoodBox experience, let us know, and we'll make it right."
+        ]
+      }
+    }
+  }
+  

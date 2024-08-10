@@ -1,0 +1,26 @@
+.create-account {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+.create-form {
+    width: 100%;
+}
+
+.error-username, .error-email, .error-password {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.password-field {
+    display: flex;
+    align-items: center;
+}
+
+.terms-field {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}

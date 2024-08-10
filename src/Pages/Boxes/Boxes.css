@@ -1,0 +1,6 @@
+.boxes{
+    grid-area: main;
+    padding-top: 80px;
+    background: rgb(255, 255, 255);
+    height: 800px;
+}
