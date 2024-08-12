@@ -116,6 +116,7 @@ export default function Boxes() {
                     <Button
                         variant={activeFilter === 'search' ? 'contained' : 'outlined'}
                         onClick={() => dispatch(setActiveFilter('search'))}
+                        
                     >
                         Search
                     </Button>
@@ -153,6 +154,7 @@ export default function Boxes() {
                         label="Type one or more keywords"
                         variant="outlined"
                         sx={{ mr: 2, flex: 1 }}
+                        onKeyDown={(e) => {if (e.key === 'Enter') handleSearch()}}
                     />
                     <Button
                         variant="contained"

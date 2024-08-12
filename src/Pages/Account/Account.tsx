@@ -1,6 +1,8 @@
 import  { useState } from 'react';
-import { Box, Typography, Grid, TextField, Button } from '@mui/material';
-
+import { Box, Typography, Grid, TextField, Button, Checkbox } from '@mui/material';
+import { useDispatch, useSelector  } from 'react-redux';
+import { RootState } from '../../store/store';
+import {completeDelivery,removeDelivery} from '../../store/slices/deliverySlice';
 export default function Account() {
     // Состояния для редактирования данных пользователя
     const [name, setName] = useState('John Doe');
@@ -8,9 +10,17 @@ export default function Account() {
     const [address, setAddress] = useState('1234 Elm Street, Apt 101, Springfield, IL');
     const [phone, setPhone] = useState('(555) 123-4567');
 
+    const dispatch = useDispatch();
+    const deliveries = useSelector((state: RootState) => state.delivery.delivery);
+    const upcomingDeliveries = deliveries.filter(item => !item.status);
     const handleSave = () => {
         // Логика для сохранения данных
         console.log('Saved:', { name, email, address, phone });
+    };
+
+    const handleCompleteDelivery = (id: string) => {
+        dispatch(completeDelivery(id));
+        dispatch(removeDelivery(id));  // Удаляем доставку после завершения
     };
 
     return (
@@ -86,36 +96,32 @@ export default function Account() {
                         }}
                     >
                         <Typography variant="h6" gutterBottom>
-                            Upcoming Deliveries
+                            Deliveries
                         </Typography>
                         <Typography variant="body1">
-                            Order #12345 - Expected delivery: August 15, 2024
+                            {upcomingDeliveries.length} upcoming deliveries
                         </Typography>
                         <Typography variant="body1">
-                            Order #12346 - Expected delivery: August 20, 2024
+                        {deliveries.map((delivery, index) => (
+                                <Grid container key={index} alignItems="center" spacing={2}>
+                                    <Grid item xs={9}>
+                                        <Typography variant="body1">
+                                            Order #{delivery.id.split('-')[0]} - Expected delivery: {delivery.date}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Checkbox
+                                            checked={delivery.status}
+                                            onChange={() => handleCompleteDelivery(delivery.id)}
+                                            color="primary"
+                                            inputProps={{ 'aria-label': 'Mark delivery as complete' }}
+                                        />
+                                    </Grid>
+                                </Grid>
+                        ))}
                         </Typography>
                     </Box>
 
-                    <Box
-                        sx={{
-                            p: 3,
-                            border: '1px solid',
-                            borderColor: 'grey.300',
-                            borderRadius: 2,
-                            backgroundColor: 'background.paper',
-                            boxShadow: 3,
-                        }}
-                    >
-                        <Typography variant="h6" gutterBottom>
-                            Past Deliveries
-                        </Typography>
-                        <Typography variant="body1">
-                            Order #12343 - Delivered: August 1, 2024
-                        </Typography>
-                        <Typography variant="body1">
-                            Order #12344 - Delivered: July 28, 2024
-                        </Typography>
-                    </Box>
                 </Grid>
             </Grid>
         </Box>
