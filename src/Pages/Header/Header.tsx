@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
 
 import ModalWindow from "../ModalWindow/ModalWindow";
-import { useState } from "react";
+
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {  logout } from "../../store/slices/loginSlice";
+import { RootState } from "../../store/store";
+import { openModal, closeModal } from '../../store/slices/modalWindSlice';
 
 export default function Header() {
-    const [modalState, setModalState] = useState(false);
-    const [loginState, setLoginState] = useState(false);
+    const modalWndState = useSelector((state: RootState) => state.modal.isOpen);
+    const dispatch = useDispatch();
+    const loginState = useSelector((state: RootState) => state.login.login);
+
 
     return (
         <>
@@ -21,15 +27,15 @@ export default function Header() {
                         <Button component={Link} to="/cart" color="inherit" sx={{ marginRight: '30px' }}>Basket</Button>
                         <Button component={Link} to="/account" color="inherit" sx={{ marginRight: '30px' }}>Account</Button>
                         {loginState ? (
-                            <Button onClick={() => setLoginState(false)} color="inherit" sx={{ marginRight: '30px', border: '2px solid rgb(236, 236, 236)', borderRadius: '20px' }}>Log out</Button>
+                            <Button onClick={() => dispatch(logout())} color="inherit" sx={{ marginRight: '30px', border: '2px solid rgb(236, 236, 236)', borderRadius: '20px' }}>Log out</Button>
                         ) : (
-                            <Button onClick={() => setModalState(true)} color="inherit" sx={{ marginRight: '30px', border: '2px solid rgb(236, 236, 236)', borderRadius: '20px' }}>Log in</Button>
+                            <Button onClick={() => dispatch(openModal())} color="inherit" sx={{ marginRight: '30px', border: '2px solid rgb(236, 236, 236)', borderRadius: '20px' }}>Log in</Button>
                         )}
                     </Box>
                 </Toolbar>
             </AppBar>
             <Toolbar /> 
-            <ModalWindow call={modalState} onDestroy={() => setModalState(false)} />
+            <ModalWindow call={modalWndState} onDestroy={() => dispatch(closeModal())} />
         </>
     )
 }

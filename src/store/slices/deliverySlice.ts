@@ -5,6 +5,7 @@ export interface DeliveryItem {
     status: boolean; // статус: выполнено (true) или не выполнено (false)
     items: string[]; // элементы доставки
     date: string; // дата доставки в формате строки
+    idUser: number | null;
 }
 
 export interface DeliveryState {
@@ -20,9 +21,8 @@ const deliverySlice = createSlice({
     initialState,
     reducers: {
         // Создание новой доставки
-        addDelivery: (state, action: PayloadAction<Omit<DeliveryItem, 'id'>>) => {
+        addDelivery: (state, action: PayloadAction<DeliveryItem>) => {
             const newDelivery: DeliveryItem = {
-                id: new Date().toISOString(), // генерируем уникальный ID на основе времени
                 ...action.payload,
             };
             state.delivery.push(newDelivery);

@@ -1,0 +1,31 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "John Doe1",
+            "email": "1",
+            "password": "1",
+            "address": "1234 Elm Street, Apt 101, Springfield, IL",
+            "phone": "(555) 123-4567",
+            "deliveries": []
+        },
+        {
+            "id": 2,
+            "name": "Jane Smith",
+            "email": "2",
+            "password": "2",
+            "address": "5678 Oak Avenue, Springfield, IL",
+            "phone": "(555) 987-6543",
+            "deliveries": []
+        },
+        {
+            "id": 3,
+            "name": "Mike Johnson",
+            "email": "mike.johnson@example.com",
+            "password": "hashed_password_3",
+            "address": "4321 Pine Lane, Springfield, IL",
+            "phone": "(555) 678-1234",
+            "deliveries": []
+        }
+    ]
+}

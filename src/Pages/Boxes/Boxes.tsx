@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { addRecipes, setRecipes } from '../../store/slices/recipeSlice';
 import {setActiveFilter } from '../../store/slices/activeFiltersSlice';
+import LoginPage from '../LoginPage/LoginPage';
 
 export default function Boxes() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -18,7 +19,7 @@ export default function Boxes() {
     const queryRef = useRef<HTMLInputElement>(null);
     const app_id = '38094cba'; 
     const app_key = '8933deda9602d01b00245b1af645e833'; 
-
+    const loginState = useSelector((state: RootState) => state.login.login);
     const recipes = useSelector((state: RootState) => state.recipes.recipes);
     const activeFilter = useSelector((state: RootState) => state.activeFilters.activeFilter);
     const dispatch = useDispatch();
@@ -98,154 +99,161 @@ export default function Boxes() {
     
     
     return (
-        <Container  maxWidth="lg" sx={{ mt: 5 }} ref={containerRef}>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: 2,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#f5f5f5',
-                        borderRadius: 2,
-                        p: 2,
-                        boxShadow: 3,
-                    }}
-                >
-                    <Button
-                        variant={activeFilter === 'search' ? 'contained' : 'outlined'}
-                        onClick={() => dispatch(setActiveFilter('search'))}
-                        
+        <Container >
+            {loginState ?(
+                <Container  maxWidth="lg" sx={{ mt: 5 }} ref={containerRef}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: 2,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: '#f5f5f5',
+                            borderRadius: 2,
+                            p: 2,
+                            boxShadow: 3,
+                        }}
                     >
-                        Search
-                    </Button>
-                    <Button
-                        variant={activeFilter === 'health' ? 'contained' : 'outlined'}
-                        onClick={() => dispatch(setActiveFilter('health'))}
-                    >
-                        Health
-                    </Button>
-                    <Button
-                        variant={activeFilter === 'cuisineType' ? 'contained' : 'outlined'}
-                        onClick={() => dispatch(setActiveFilter('cuisineType'))}
-                    >
-                        Cuisine
-                    </Button>
+                        <Button
+                            variant={activeFilter === 'search' ? 'contained' : 'outlined'}
+                            onClick={() => dispatch(setActiveFilter('search'))}
+                            
+                        >
+                            Search
+                        </Button>
+                        <Button
+                            variant={activeFilter === 'health' ? 'contained' : 'outlined'}
+                            onClick={() => dispatch(setActiveFilter('health'))}
+                        >
+                            Health
+                        </Button>
+                        <Button
+                            variant={activeFilter === 'cuisineType' ? 'contained' : 'outlined'}
+                            onClick={() => dispatch(setActiveFilter('cuisineType'))}
+                        >
+                            Cuisine
+                        </Button>
+                    </Box>
                 </Box>
-            </Box>
 
-            {activeFilter === 'search' && (
-                <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        mt: 5,
-                        backgroundColor: '#f5f5f5',
-                        borderRadius: 2,
-                        p: 2,
-                        boxShadow: 3,
-                    }}
-                >
-                    <TextField
-                        inputRef={queryRef}
-                        id="search"
-                        label="Type one or more keywords"
-                        variant="outlined"
-                        sx={{ mr: 2, flex: 1 }}
-                        onKeyDown={(e) => {if (e.key === 'Enter') handleSearch()}}
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleSearch}
-                        sx={{ height: '100%' }}
+                {activeFilter === 'search' && (
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            mt: 5,
+                            backgroundColor: '#f5f5f5',
+                            borderRadius: 2,
+                            p: 2,
+                            boxShadow: 3,
+                        }}
                     >
-                        Fetch
-                    </Button>
-                </Box>
-            )}
+                        <TextField
+                            inputRef={queryRef}
+                            id="search"
+                            label="Type one or more keywords"
+                            variant="outlined"
+                            sx={{ mr: 2, flex: 1 }}
+                            onKeyDown={(e) => {if (e.key === 'Enter') handleSearch()}}
+                        />
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleSearch}
+                            sx={{ height: '100%' }}
+                        >
+                            Fetch
+                        </Button>
+                    </Box>
+                )}
 
 
-            <Grid container spacing={4}  justifyContent="center">
-                
-                <Grid item xs={12} sm={8} md={9}>
-                    {/* Health Filters start  */}
-                    {activeFilter === 'health' && (
-                        
-                        <FormControl component="fieldset" sx={{ mb: 3 }}>
-                            <FormLabel component="legend">Allergies</FormLabel>
+                <Grid container spacing={4}  justifyContent="center">
+                    
+                    <Grid item xs={12} sm={8} md={9}>
+                        {/* Health Filters start  */}
+                        {activeFilter === 'health' && (
+                            
+                            <FormControl component="fieldset" sx={{ mb: 3 }}>
+                                <FormLabel component="legend">Allergies</FormLabel>
+                                <FormGroup row>
+                                    {fillters.health.map((filter) => (
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    name={filter}
+                                                    checked={healthParam.includes(filter)}
+                                                    onChange={handleHealthChange}
+                                                    color="primary"
+                                                />
+                                        }
+                                        label={filter}
+                                        key={filter}
+                                    />
+                                    ))}
+                                </FormGroup>
+                            </FormControl>)}
+                            {/* Health Filters end */}
+                            {/* Cuisine Type start  */}
+
+                            { activeFilter === 'cuisineType' && <FormControl component="fieldset" sx={{ mb: 3 }}>
+                            <FormLabel component="legend"> Cuisine Type</FormLabel>
+
                             <FormGroup row>
-                                {fillters.health.map((filter) => (
+                                {fillters.cuisineType.map((filter) => (
                                     <FormControlLabel
                                         control={
                                             <Checkbox
                                                 name={filter}
-                                                checked={healthParam.includes(filter)}
-                                                onChange={handleHealthChange}
+                                                checked={cuisineTypeParam.includes(filter)}
+                                                onChange={handleCuisineTypeChange}
                                                 color="primary"
                                             />
-                                    }
-                                    label={filter}
-                                    key={filter}
-                                />
+                                        }
+                                        label={filter}
+                                        key={filter}
+                                    />
                                 ))}
-                            </FormGroup>
-                        </FormControl>)}
-                        {/* Health Filters end */}
-                        {/* Cuisine Type start  */}
-
-                        { activeFilter === 'cuisineType' && <FormControl component="fieldset" sx={{ mb: 3 }}>
-                        <FormLabel component="legend"> Cuisine Type</FormLabel>
-
-                        <FormGroup row>
-                            {fillters.cuisineType.map((filter) => (
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            name={filter}
-                                            checked={cuisineTypeParam.includes(filter)}
-                                            onChange={handleCuisineTypeChange}
-                                            color="primary"
-                                        />
-                                    }
-                                    label={filter}
-                                    key={filter}
-                                />
-                            ))}
-                            
-                        </FormGroup>
-                        </FormControl>}
-
-                        {/* Cuisine Type end     */}
-
-                        
-                    {loading ? (
-                        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, height: '100vh' }}>
-                            <CircularProgress />
-                        </Box>
-                    ) : (
-                        recipes.length > 0 ? (
-                            
-                            <Grid container  spacing={3} sx={{  mt: 4 }}>
                                 
-                                {recipes.map((recipe, index) => (
-                                    <Grid item xs={12} sm={6} md={4}   key={index} >
-                                        <RecipeCards {...recipe} />
-                                    </Grid>
-                                ))}
-                            </Grid>
+                            </FormGroup>
+                            </FormControl>}
+
+                            {/* Cuisine Type end     */}
+
+                            
+                        {loading ? (
+                            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, height: '100vh' }}>
+                                <CircularProgress />
+                            </Box>
                         ) : (
-                            <Typography variant="body1" sx={{ mt: 4, textAlign: 'center' }}>
-                                Nothing matches your request
-                            </Typography>
-                        )
-                    ) 
-                    }
+                            recipes.length > 0 ? (
+                                
+                                <Grid container  spacing={3} sx={{  mt: 4 }}>
+                                    
+                                    {recipes.map((recipe, index) => (
+                                        <Grid item xs={12} sm={6} md={4}   key={index} >
+                                            <RecipeCards {...recipe} />
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            ) : (
+                                <Typography variant="body1" sx={{ mt: 4, textAlign: 'center' }}>
+                                    Nothing matches your request
+                                </Typography>
+                            )
+                        ) 
+                        }
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}><Button onClick={handleMore} variant='contained' sx={{ mt: 5 }}>More</Button></Box>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}><Button onClick={handleMore} variant='contained' sx={{ mt: 5 }}>More</Button></Box>
+            </Container>
+            ):(
+                <LoginPage></LoginPage>
+            )}
+            
         </Container>
     );
 }

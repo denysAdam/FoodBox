@@ -1,23 +1,29 @@
-import { useState } from 'react';
+
 import Login from '../../Log in/in/Login';
 import './ModalWindow.css';
 import CreateAccount from '../../Log in/out/CreateAccount';
 import { Modal, Box, Button } from '@mui/material';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { openLogin, openCreate, closeModal } from '../../store/slices/modalWindSlice';
+import { RootState } from '../../store/store';
 export interface ModalState {
     call: boolean;
     onDestroy: () => void;
 }
 
 const ModalWindow: React.FC<ModalState> = ({ call, onDestroy }) => {
-    const [logForm, setLogForm] = useState(false);
+    
+
+    const dispatch = useDispatch();
+    const modalWndStatePage = useSelector((state: RootState) => state.modal.formType);
+
 
     if (!call) return null;
 
     const closeWnd = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (event.target instanceof HTMLElement && event.target.className.includes('modal')) {
             onDestroy();
-            setLogForm(false);
+            dispatch(closeModal());
         }
     };
 
@@ -45,7 +51,7 @@ const ModalWindow: React.FC<ModalState> = ({ call, onDestroy }) => {
                 >
                     <Box className="btns" sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <Button
-                            onClick={() => setLogForm(false)}
+                            onClick={() => dispatch(openLogin())}
                             variant="contained"
                             color="primary"
                             className="accept"
@@ -53,7 +59,7 @@ const ModalWindow: React.FC<ModalState> = ({ call, onDestroy }) => {
                             Log in
                         </Button>
                         <Button
-                            onClick={() => setLogForm(true)}
+                            onClick={() => dispatch(openCreate())}
                             variant="contained"
                             color="secondary"
                             className="reject"
@@ -62,8 +68,8 @@ const ModalWindow: React.FC<ModalState> = ({ call, onDestroy }) => {
                         </Button>
                     </Box>
                     <Box className="logForms" sx={{ marginTop: '1rem' }}>
-                        {!logForm && <Login />}
-                        {logForm && <CreateAccount />}
+                        {modalWndStatePage === 'login' && <Login />}
+                        {modalWndStatePage === 'signup'  && <CreateAccount />}
                     </Box>
                 </Box>
             </Box>
