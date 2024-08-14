@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import users from '../../data/materials.json'; 
 export interface UserState {
     user: User[];
 }
@@ -20,8 +20,11 @@ const userSlice = createSlice({
     name: 'userCreate',
     initialState,
     reducers: {
-        addUser: (state, action: PayloadAction<User>) => {
-            state.user.push(action.payload);
+        addUser: (state, action: PayloadAction<Omit<User, 'userId'>>) => {
+            const lastUserId = Math.max(...users.users.map(user => user.id));
+            const newUserId = lastUserId + 1;
+            state.user.push({ ...action.payload, userId: newUserId.toString() });
+            console.log(state.user)
         },
     },
 });

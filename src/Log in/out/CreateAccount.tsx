@@ -1,12 +1,36 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Container, TextField, Button, Checkbox, FormControlLabel, Box, IconButton, InputAdornment, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import './CreateAccount.css';
+import { addUser } from '../../store/slices/createUserSlice';
+import { AppDispatch } from '../../store/store';
+import { useDispatch } from 'react-redux';
+
 
 export default function CreateAccount() {
     const [showPassword, setShowPassword] = useState(false);
+    const [userName, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [termsAccepted, setTermsAccepted] = useState(false);
+    const dispatch: AppDispatch = useDispatch();
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
+    };
+
+    
+    const isFormValid = userName && email && password && termsAccepted;
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        
+        if (isFormValid) {
+            // Логика отправки данных на сервер или в redux
+            dispatch(addUser({  userName, email, password,userAdress:'',deliveries: [] }));
+            console.log("Account created:", {  userName, email, password,userAdress:'',deliveries: [] });
+        } else {
+            console.log("Form is not complete");
+        }
     };
 
     return (
@@ -26,7 +50,7 @@ export default function CreateAccount() {
                 <Typography variant="h5" component="h2" gutterBottom>
                     Create Account
                 </Typography>
-                <form className="create-form" noValidate>
+                <form className="create-form" noValidate onSubmit={handleSubmit}>
                     <TextField
                         fullWidth
                         margin="normal"
@@ -36,8 +60,9 @@ export default function CreateAccount() {
                         autoComplete="username"
                         autoFocus
                         required
+                        value={userName}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
-                    <span className="error-username"></span>
                     <TextField
                         fullWidth
                         margin="normal"
@@ -46,8 +71,9 @@ export default function CreateAccount() {
                         name="email"
                         autoComplete="email"
                         required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
-                    <span className="error-email"></span>
                     <TextField
                         fullWidth
                         margin="normal"
@@ -57,6 +83,8 @@ export default function CreateAccount() {
                         type={showPassword ? "text" : "password"}
                         autoComplete="current-password"
                         required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -71,9 +99,17 @@ export default function CreateAccount() {
                             )
                         }}
                     />
-                    <span className="error-password"></span>
                     <FormControlLabel
-                        control={<Checkbox id="terms" name="terms" color="primary" required />}
+                        control={
+                            <Checkbox
+                                id="terms"
+                                name="terms"
+                                color="primary"
+                                required
+                                checked={termsAccepted}
+                                onChange={(e) => setTermsAccepted(e.target.checked)}
+                            />
+                        }
                         label="I agree to the Terms"
                     />
                     <Button
@@ -82,7 +118,7 @@ export default function CreateAccount() {
                         variant="contained"
                         color="primary"
                         sx={{ mt: 3, mb: 2 }}
-                        onClick={(e) => { e.preventDefault(); }}
+                        disabled={!isFormValid} // Деактивация кнопки, если форма не валидна
                     >
                         Create account
                     </Button>

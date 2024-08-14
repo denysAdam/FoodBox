@@ -5,7 +5,7 @@ export interface DeliveryItem {
     status: boolean; // статус: выполнено (true) или не выполнено (false)
     items: string[]; // элементы доставки
     date: string; // дата доставки в формате строки
-    idUser: number | null;
+    idUser: number | string | null;
 }
 
 export interface DeliveryState {
