@@ -96,8 +96,8 @@ export default function About() {
 
             <List >
                 {aboutFoodBox.whyChooseUs.points.map((point, index) => (
-                    <ListItem sx={{ height: '100%' }}>
-                        <Grid item xs={12} md={4} key={index}>
+                    <ListItem sx={{ height: '100%' }} key={index}>
+                        <Grid item xs={12} md={4} >
                         
                             <CardContent>
                                 <Typography variant="h6" component="h3">

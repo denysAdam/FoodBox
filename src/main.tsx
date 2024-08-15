@@ -17,7 +17,9 @@ import About from './Pages/About/About.tsx';
 import Account from './Pages/Account/Account.tsx';
 import Boxes from './Pages/Boxes/Boxes.tsx';
 import Cart from './Pages/Counter/Cart.tsx';
+import ErrorPage from './Pages/Error/Error.tsx';
 import { Provider } from 'react-redux';
+import ScrollToTop from './Pages/scrollTop.ts';
 
 
 export const Root = ()=>{
@@ -27,6 +29,7 @@ export const Root = ()=>{
     <div className='container'>
       <Provider store={store}>
         <Header />
+        <ScrollToTop/>
         <Footer/>
         <Outlet/>
       </Provider>
@@ -41,6 +44,7 @@ const router = createBrowserRouter(
       <Route path='/account' element={<Account></Account>}></Route>
       <Route path='/boxes' element={<Boxes></Boxes>}></Route>
       <Route path='/cart' element={<Cart></Cart>}></Route>
+      <Route path='*' element={<ErrorPage />} />
     </Route>
   )
 );

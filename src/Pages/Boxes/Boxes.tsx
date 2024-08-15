@@ -112,8 +112,14 @@ export default function Boxes() {
                             alignItems: 'center',
                             backgroundColor: '#f5f5f5',
                             borderRadius: 2,
-                            p: 2,
-                            boxShadow: 3,
+                            p: {
+                                xs: 0, 
+                                sm: 2, 
+                            },
+                            boxShadow: {
+                                xs: 0, 
+                                sm: 3, 
+                            },
                         }}
                     >
                         <Button

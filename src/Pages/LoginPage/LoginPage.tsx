@@ -18,16 +18,15 @@ export default function LoginPage() {
     };
     
     return (
-        <Box 
+            <Box 
                     sx={{
                         display: 'flex',
-                        flexDirection: 'column',   // Размещаем элементы вертикально
-                        justifyContent: 'center',  // Центрируем по горизонтали
-                        alignItems: 'center',      // Центрируем по вертикали
-                        height: '90vh',            // Высота контейнера
-                        width: '100%',             // Ширина контейнера
-                        padding: 2,
-                        gap: 2,                    // Отступы между элементами
+                        flexDirection: 'column',   
+                        justifyContent: 'center',  
+                        alignItems: 'center',      
+                        height: '90vh',            
+                        width: '100%',             
+                        gap: 2,                   
                     }}
                 >
                     <Typography variant="h4" gutterBottom>
@@ -58,6 +57,6 @@ export default function LoginPage() {
                     >
                         Sign Up
                     </Button>
-                </Box>
+            </Box>
     )
 }
