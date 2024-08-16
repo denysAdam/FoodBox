@@ -12,6 +12,7 @@ export default function Footer() {
                 mt: 'auto', 
                 gridArea: 'footer',
                 borderTop:`1px solid gray`,
+                backgroundColor: '#4CAF50',
             }}
         >
             <Container maxWidth="lg">

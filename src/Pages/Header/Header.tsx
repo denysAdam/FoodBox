@@ -19,7 +19,7 @@ export default function Header() {
         setMobileResponse(!mobileResponse);
     };
     const drawerBox = (
-        <Box sx={{ width: 250 }} onClick={handleResize}>
+        <Box sx={{ width: 250  }} onClick={handleResize}>
             <List>
                 <ListItem button component={Link} to="/">
                     <ListItemText primary="About us" />
@@ -48,10 +48,10 @@ export default function Header() {
     
     return (
         <>
-            <AppBar position="fixed" sx={{ background: 'rgb(73, 100, 155)', gridArea: 'head', width: '100vw', zIndex: 10, borderBottom: '1px solid rgb(124, 123, 123)' }}>
+            <AppBar position="fixed" sx={{ background: '#4CAF50', gridArea: 'head', width: '100vw', zIndex: 10, borderBottom: '1px solid rgb(124, 123, 123)' }}>
                 <Toolbar>
-                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        FoodBox logo
+                    <Typography variant="h4" sx={{ flexGrow: 1 }}>
+                        FoodBox
                     </Typography>
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
                         <Button component={Link} to="/" color="inherit" sx={{ marginRight: '30px' }}>About us</Button>

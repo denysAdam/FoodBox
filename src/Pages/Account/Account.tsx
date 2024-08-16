@@ -58,7 +58,7 @@ export default function Account() {
     return (
         <Container>
             {loginState ? (
-                <Box sx={{ flexGrow: 1, p: 3 }}>
+                <Box sx={{ flexGrow: 1, px: 3 , py: 8}}>
                     <Typography variant="h4" gutterBottom>
                         Account Information
                     </Typography>

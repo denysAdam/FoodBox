@@ -20,6 +20,7 @@ import Cart from './Pages/Counter/Cart.tsx';
 import ErrorPage from './Pages/Error/Error.tsx';
 import { Provider } from 'react-redux';
 import ScrollToTop from './Pages/scrollTop.ts';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 
 
 export const Root = ()=>{
@@ -36,7 +37,11 @@ export const Root = ()=>{
     </div>
   );
 }
-
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Montserrat, sans-serif',
+  },
+});
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Root></Root>}>
@@ -51,5 +56,8 @@ const router = createBrowserRouter(
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
-  <RouterProvider router={ router}></RouterProvider>
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <RouterProvider router={router}></RouterProvider>
+  </ThemeProvider>
 );

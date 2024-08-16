@@ -24,7 +24,7 @@ export default function LoginPage() {
                         flexDirection: 'column',   
                         justifyContent: 'center',  
                         alignItems: 'center',      
-                        height: '90vh',            
+                        height: '100vh',            
                         width: '100%',             
                         gap: 2,                   
                     }}

@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import content  from '../../TextContent/AboutText/aboutText.json';
-import { Container, Typography, Grid, Card, CardContent, CardMedia,  Button, List, ListItem } from '@mui/material';
+import { Container, Typography, Grid, Card, CardContent, CardMedia,  Button, List, ListItem, Box } from '@mui/material';
 export default function About() {
     interface AboutFoodBoxText {
         aboutFoodBox: {
@@ -31,7 +31,7 @@ export default function About() {
                 {aboutFoodBox.title}
             </Typography>
 
-            <Typography variant="body1" align="center" mt={2} sx={{ fontSize: '1.2rem' }}>
+            <Typography variant="body1" align="inherit" mt={2} sx={{ fontSize: '1.2rem' }}>
                 {aboutFoodBox.description}
             </Typography>
 
@@ -70,25 +70,39 @@ export default function About() {
             </Grid>
 
             {/* Benefits section */}
+            <Box
+                sx={{
+                    width: '99vw',
+                    marginLeft: 'calc(-50vw + 50.5%)', // Makes the background stretch across the screen
+                    backgroundImage: 'url("/Images/benefits.jpg")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    py: 4,
+                    mt: 4
+                }}
+            >
+                <Container maxWidth="lg">
+                    <Typography variant="h3" align="center" mt={4}> {aboutFoodBox.benefits.title}</Typography>
 
-            <Typography variant="h4" align="center" mt={4}> {aboutFoodBox.benefits.title}</Typography>
-
-            <Grid container mt={2}  spacing={4}>
-                {aboutFoodBox.benefits.points.map((point, index) => (
-                    <Grid item xs={12} md={4} key={index}>
-                        <Card sx={{ height: '100%' }}>
-                            <CardContent>
-                                <Typography variant="h5" component="h4" align="center" mt={1} fontWeight={'bold'}>
-                                    {point.title}
-                                </Typography>
-                                <Typography variant="h6" component="h3">
-                                    {point.description}
-                                </Typography>
-                            </CardContent>
-                        </Card>
+                    <Grid container mt={2} spacing={4}>
+                        {aboutFoodBox.benefits.points.map((point, index) => (
+                            <Grid item xs={12} md={4} key={index}>
+                                <Card sx={{ height: '100%' }}>
+                                    <CardContent>
+                                        <Typography variant="h5" component="h4" align="center" mt={1} fontWeight={'bold'}>
+                                            {point.title}
+                                        </Typography>
+                                        <Typography variant="h6" component="h3">
+                                            {point.description}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))}
                     </Grid>
-                ))}
-            </Grid>
+                </Container>
+            </Box>
+            
             
             {/* whyChooseUs section */}
 
