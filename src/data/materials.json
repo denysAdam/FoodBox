@@ -2,7 +2,7 @@
     "users": [
         {
             "id": 1,
-            "name": "John Doe1",
+            "name": "John Doe",
             "email": "1",
             "password": "1",
             "address": "1234 Elm Street, Apt 101, Springfield, IL",
@@ -12,8 +12,8 @@
         {
             "id": 2,
             "name": "Jane Smith",
-            "email": "2",
-            "password": "2",
+            "email": "jane.smith@example.com",
+            "password": "hashed_password_2",
             "address": "5678 Oak Avenue, Springfield, IL",
             "phone": "(555) 987-6543",
             "deliveries": []
