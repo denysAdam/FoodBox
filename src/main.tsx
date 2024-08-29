@@ -51,7 +51,10 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<Cart></Cart>}></Route>
       <Route path='*' element={<ErrorPage />} />
     </Route>
-  )
+  ),
+  {
+    basename: '/FoodBox/',
+  }
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
